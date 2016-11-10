@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package project1;
 
 public class test {
@@ -8,3 +9,10 @@ public class test {
 	}
 
 }
+=======
+package project1;
+
+public class test {
+
+}
+>>>>>>> origin/master
