@@ -1,18 +1,10 @@
-<<<<<<< HEAD
 package project1;
 
 public class test {
 	
 	public int Prime(){
-		return 0;
+		return 1;
 		
 	}
 
 }
-=======
-package project1;
-
-public class test {
-
-}
->>>>>>> origin/master
