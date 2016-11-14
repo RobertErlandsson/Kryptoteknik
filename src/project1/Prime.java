@@ -8,6 +8,7 @@ public class Prime {
 	
 	public static void main(String[] args){
 		BigInteger N = new BigInteger("4444444444");
+		long start = System.currentTimeMillis();
 		int L = 1000; //number of primes in the factorbase
 		primes = new int[L]; // vector to store the first L primes
 		pairs = new A[L+5];
@@ -22,6 +23,8 @@ public class Prime {
 		// find factors of N given all pairs implemented by linus
 		find_factors(L);
 		
+		long end = System.currentTimeMillis();
+		System.out.println("It took " + (end-start) + " ms");
 	}
 
 	public static void get_primes(){
