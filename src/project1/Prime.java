@@ -32,6 +32,19 @@ public class Prime {
 		return;
 	}
 	
+	/** Calculate the square root of a BigInteger in logarithmic time */
+	public BigInteger squareRoot(BigInteger x) { 
+	      BigInteger right = x, left = BigInteger.ZERO, mid; 
+	      while(right.subtract(left).compareTo(BigInteger.ONE) > 0) { 
+	            mid = (right.add(left)).shiftRight(1);
+	            if(mid.multiply(mid).compareTo(x) > 0) 
+	                  right = mid; 
+	            else 
+	                  left = mid; 
+	      } 
+	      return left; 
+	}
+	
 	//constructs M, solves xM = 0 and finds decomposition.
 	public static void find_factors(int L){
 		//change so that you check if the row already exists in M!!
