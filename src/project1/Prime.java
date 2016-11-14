@@ -56,7 +56,7 @@ public class Prime {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return indata;
 		
 	}
 	
