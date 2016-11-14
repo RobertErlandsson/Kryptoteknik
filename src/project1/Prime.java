@@ -1,5 +1,10 @@
 package project1;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class Prime {
 	static int[] primes;
@@ -7,7 +12,8 @@ public class Prime {
 	static short[][] M;
 	
 	public static void main(String[] args){
-		BigInteger N = new BigInteger("4444444444");
+		ArrayList<BigInteger> numbers = readFile("DATA/input.txt"); //Reads from file. Numbers include those that should be tested plus our own number
+		BigInteger N = numbers.get(1); //Gets one of the numbers 
 		long start = System.currentTimeMillis();
 		int L = 1000; //number of primes in the factorbase
 		primes = new int[L]; // vector to store the first L primes
@@ -33,6 +39,25 @@ public class Prime {
 	
 	public static void get_pairs(){
 		return;
+	}
+	
+	private static ArrayList<BigInteger> readFile(String s) {
+		ArrayList<BigInteger> indata = new ArrayList<BigInteger>();
+		
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(s));
+			int limit = Integer.parseInt(br.readLine());
+			for (int i = 0; i < limit; i++){
+				indata.add(new BigInteger(br.readLine()));
+			}
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 	
 	/** Calculate the square root of a BigInteger in logarithmic time */
