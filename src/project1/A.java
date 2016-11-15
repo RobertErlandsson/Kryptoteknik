@@ -25,4 +25,16 @@ public class A {
 	public int[] get_factors(){
 		return factors;
 	}
+	
+	public void setX(BigInteger x){
+		this.x = x;
+	}
+	
+	public void setY(BigInteger x){
+		this.x = x;
+	}
+	
+	public void set_factors(int[] factors){
+		this.factors = factors;
+	}
 }
