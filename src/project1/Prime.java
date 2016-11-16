@@ -1,16 +1,20 @@
 package project1;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Prime {
 	static int[] primes;
 	static A[] pairs;
 	static short[][] M;
+	static int L;
+	
 
 	public static void main(String[] args) {
 		ArrayList<BigInteger> numbers = readFile("DATA/input.txt"); // Reads
@@ -27,7 +31,7 @@ public class Prime {
 																	// number
 		BigInteger N = numbers.get(1); // Gets one of the numbers
 		long start = System.currentTimeMillis();
-		int L = 1000; // number of primes in the factorbase
+		L = 1000; // number of primes in the factorbase
 		primes = new int[L]; // vector to store the first L primes
 		pairs = new A[L + 5];
 		M = new short[L + 5][L];
@@ -47,8 +51,18 @@ public class Prime {
 	}
 
 	public static void get_primes() {
-		return;
+		Scanner scan = null;
+		try {
+			scan = new Scanner(new FileReader(new File("prim_2_24")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		for (int i = 0; i < L; i++) {
+			primes[i] = scan.nextInt();
+		}
+		scan.close();
 	}
+		
 
 	public static void get_pairs() {
 		return;
