@@ -108,8 +108,8 @@ public class Prime {
 		ps.print(" ");					
 		ps.println(L);					
 	
-		for (int i = 0; i < L; i++) {
-			for (int j = 0; j < goalRs; j++) {
+		for (int i = 0; i < goalRs; i++) {
+			for (int j = 0; j < L; j++) {
 				ps.print(M[i][j] % 2);
 				//ps.print(" ");
 			}
