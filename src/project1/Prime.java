@@ -19,6 +19,7 @@ public class Prime {
 	static int L;
 	static int goalRs;
 	static ArrayList<BigInteger> rs;
+	static ArrayList<BigInteger> r2s;
 	static ArrayList<boolean[]> solutions;
 
 	public static void main(String[] args) {
@@ -30,12 +31,13 @@ public class Prime {
 													// one
 													// of the numbers
 		long start = System.currentTimeMillis();
-		L = 10;// number of primes in the factorbase
+		L = 30;// number of primes in the factorbase
 		goalRs = L + 5; // Number of different r:s we need
 		primes = new long[L]; // vector to store the first L primes
 		pairs = new A[goalRs];
 		M = new short[goalRs][L];
 		rs = new ArrayList<BigInteger>();
+		r2s = new ArrayList<BigInteger>();
 		solutions = new ArrayList<boolean[]>();
 
 		// get the first L primes. implemented by someone
@@ -83,6 +85,7 @@ public class Prime {
 				BigInteger r = squareRoot(N.multiply(BigInteger.valueOf(k))).add(BigInteger.valueOf(j));
 				// System.out.println("xxxxxxx");
 				BigInteger r2 = r.multiply(r).mod(N);
+				r2s.add(r2);
 				nOfRows += test_BI(r, r2, nOfRows);
 				// System.out.println("xxxxxxxxxxxx");
 				// System.out.println("j = " + j + "k = " + k);
@@ -101,10 +104,10 @@ public class Prime {
 			e1.printStackTrace();
 		}
 
-		ps.print(L);			// test to see values get added to file
-		ps.print(" ");
-		ps.println(goalRs);		// test to see values get added to file
-
+		ps.println(r2s.size());			// first line contains the matrix size M*N
+		ps.print(" ");						// M denotes the number of (r^2 mod N) - numbers
+		ps.println(L);									// N denotes the factor base size
+	
 		for (int i = 0; i < L; i++) {
 			for (int j = 0; j < goalRs; j++) {
 				ps.print(M[i][j] % 2);
@@ -150,7 +153,7 @@ public class Prime {
 		}
 		scan.close();
 	}
-	
+
 	
 	public static long[] generate_primes(int L) {
 		long[] primes = new long[L];
