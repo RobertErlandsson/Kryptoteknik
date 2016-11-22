@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -18,6 +19,7 @@ public class Prime {
 	static int L;
 	static int goalRs;
 	static ArrayList<BigInteger> rs;
+	static ArrayList<boolean[]> solutions;
 
 	public static void main(String[] args) {
 		// ArrayList<BigInteger> numbers = readFile("DATA/input.txt"); // Reads
@@ -34,6 +36,7 @@ public class Prime {
 		pairs = new A[goalRs];
 		M = new short[goalRs][L];
 		rs = new ArrayList<BigInteger>();
+		solutions = new ArrayList<boolean[]>();
 
 		// get the first L primes. implemented by someone
 		primes = generate_primes(L);
@@ -46,9 +49,10 @@ public class Prime {
 		System.out.println("after GenRs");
 
 		// find factors of N given all pairs implemented by linus
-		find_factors(N);
+		getSolutions();
+		//find_factors(N);
 		System.out.println("after find factors");
-
+		
 		long end = System.currentTimeMillis();
 		System.out.println("It took " + (end - start) + " ms");
 	}
@@ -88,7 +92,66 @@ public class Prime {
 		}
 		return null;
 	}
+	
+	public static void getSolutions() {
+		PrintStream ps = null;
+		try {
+			ps = new PrintStream(new File("in"));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 
+		ps.print(L);			// test to see values get added to file
+		ps.print(" ");
+		ps.println(goalRs);		// test to see values get added to file
+
+		for (int i = 0; i < L; i++) {
+			for (int j = 0; j < goalRs; j++) {
+				ps.print(M[i][j] % 2);
+			}
+			ps.println();
+		}
+
+		ps.close();
+
+		try {
+			new File("out").createNewFile();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		@SuppressWarnings("unused")
+		Process proc;
+		try {
+			proc = Runtime.getRuntime().exec("C:\\Github\\Kryptoteknik\\src\\project1\\gaussbin in out");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Scanner scan = null;
+
+		try {
+			scan = new Scanner(new FileReader(new File("out")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		int nSolutions = scan.nextInt();
+
+		for (int i = 0; i < nSolutions; i++) {
+			boolean[] row = new boolean[L];
+			for (int j = 0; j < L; j++) {
+				if(row[j] = scan.nextInt() == 0){
+					row[j]=false;
+				}else{
+					row[j]=true;
+				}
+			}
+			solutions.add(row);
+		}
+		scan.close();
+	}
+	
+	
 	public static long[] generate_primes(int L) {
 		long[] primes = new long[L];
 		int n = 0, i, size = L, j, k;
