@@ -104,13 +104,14 @@ public class Prime {
 			e1.printStackTrace();
 		}
 
-		ps.println(r2s.size());			// first line contains the matrix size M*N
-		ps.print(" ");						// M denotes the number of (r^2 mod N) - numbers
-		ps.println(L);									// N denotes the factor base size
+		ps.print(r2s.size());		
+		ps.print(" ");					
+		ps.println(L);					
 	
 		for (int i = 0; i < L; i++) {
 			for (int j = 0; j < goalRs; j++) {
 				ps.print(M[i][j] % 2);
+				//ps.print(" ");
 			}
 			ps.println();
 		}
