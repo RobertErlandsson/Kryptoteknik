@@ -27,11 +27,11 @@ public class Prime {
 		// from file Numbers include those that should be tested plus our own
 		// number
 
-		BigInteger N = new BigInteger("323"); // numbers.get(1); // Gets
+		BigInteger N = new BigInteger("16637"); // numbers.get(1); // Gets
 													// one
 													// of the numbers
 		long start = System.currentTimeMillis();
-		L = 15;// number of primes in the factorbase
+		L = 12;// number of primes in the factorbase
 		goalRs = L + 5; // Number of different r:s we need
 		primes = new long[L]; // vector to store the first L primes
 		pairs = new A[goalRs];
@@ -51,7 +51,7 @@ public class Prime {
 		System.out.println("after GenRs");
 
 		// find factors of N given all pairs implemented by linus
-		getSolutions();
+		getSolutions(N);
 		System.out.println("after getSolution");
 		//find_factors(N);
 		
@@ -95,7 +95,7 @@ public class Prime {
 		return null;
 	}
 	
-	public static void getSolutions() {
+	public static void getSolutions(BigInteger N) {
 		PrintStream ps = null;
 		try {
 			ps = new PrintStream(new File("in"));
@@ -107,9 +107,9 @@ public class Prime {
 		ps.print(" ");					
 		ps.println(L);					
 	
-		for (int i = 0; i < goalRs; i++) {
-			for (int j = 0; j < L; j++) {
-				ps.print(M[i][j] % 2);
+		for (int i = 0; i < L; i++) {
+			for (int j = 0; j < goalRs; j++) {
+				ps.print(M[j][i]%2);
 				ps.print(" ");
 			}
 			ps.println();
@@ -138,18 +138,15 @@ public class Prime {
 			e.printStackTrace();
 		}
 
-		int nSolutions = scan.nextInt();
-		System.out.println("Number of solutions = " +nSolutions);
+		A Solutions = new A(BigInteger.ONE,BigInteger.ONE,L);
+		int nSolutions= scan.nextInt();
 		for (int i = 0; i < nSolutions; i++) {
-			boolean[] row = new boolean[goalRs];
 			for (int j = 0; j < goalRs; j++) {
-				if(row[j] = scan.nextInt() == 0){
-					row[j]=false;
-				}else{
-					row[j]=true;
+				if(scan.nextInt() == 1){
+					multiply(Solutions,pairs[j]);
 				}
 			}
-			solutions.add(row);
+			test_solution(Solutions,N);
 		}
 		scan.close();
 	}
@@ -199,9 +196,9 @@ public class Prime {
 			binary[i] = (short) (expo[i] % 2);
 		}
 
-		if (y.compareTo(BigInteger.valueOf(1)) == 0 && !containss(binary)) {
+		if (y.compareTo(BigInteger.valueOf(1)) == 0 && !containss(expo)) {
 			for (int i = 0; i < L; i++) {
-				M[nOfRows][i] = binary[i];
+				M[nOfRows][i] = (short) expo[i];
 			}
 			pairs[nOfRows] = number;
 			System.out.println("Hittat " + nOfRows + "tal");
@@ -212,7 +209,7 @@ public class Prime {
 		return 0;
 	}
 
-	private static boolean containss(short[] binary) {
+	private static boolean containss(int[] binary) {
 		boolean row = true;
 		// System.out.println("in containss");
 		for (int i = 0; i < goalRs; i++) {
