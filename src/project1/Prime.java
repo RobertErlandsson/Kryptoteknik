@@ -27,11 +27,11 @@ public class Prime {
 		// from file Numbers include those that should be tested plus our own
 		// number
 
-		BigInteger N = new BigInteger("16637"); // numbers.get(1); // Gets
+		BigInteger N = new BigInteger("323"); // numbers.get(1); // Gets
 													// one
 													// of the numbers
 		long start = System.currentTimeMillis();
-		L = 30;// number of primes in the factorbase
+		L = 15;// number of primes in the factorbase
 		goalRs = L + 5; // Number of different r:s we need
 		primes = new long[L]; // vector to store the first L primes
 		pairs = new A[goalRs];
@@ -52,6 +52,7 @@ public class Prime {
 
 		// find factors of N given all pairs implemented by linus
 		getSolutions();
+		
 		//find_factors(N);
 		System.out.println("after find factors");
 		
@@ -85,7 +86,6 @@ public class Prime {
 				BigInteger r = squareRoot(N.multiply(BigInteger.valueOf(k))).add(BigInteger.valueOf(j));
 				// System.out.println("xxxxxxx");
 				BigInteger r2 = r.multiply(r).mod(N);
-				r2s.add(r2);
 				nOfRows += test_BI(r, r2, nOfRows);
 				// System.out.println("xxxxxxxxxxxx");
 				// System.out.println("j = " + j + "k = " + k);
@@ -111,7 +111,7 @@ public class Prime {
 		for (int i = 0; i < goalRs; i++) {
 			for (int j = 0; j < L; j++) {
 				ps.print(M[i][j] % 2);
-				//ps.print(" ");
+				ps.print(" ");
 			}
 			ps.println();
 		}
@@ -127,7 +127,7 @@ public class Prime {
 		@SuppressWarnings("unused")
 		Process proc;
 		try {
-			proc = Runtime.getRuntime().exec("C:\\Github\\Kryptoteknik\\src\\project1\\gaussbin in out");
+			proc = Runtime.getRuntime().exec("./GaussBin.exe in out");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -140,10 +140,10 @@ public class Prime {
 		}
 
 		int nSolutions = scan.nextInt();
-
 		for (int i = 0; i < nSolutions; i++) {
-			boolean[] row = new boolean[L];
-			for (int j = 0; j < L; j++) {
+			//System.out.println(nSolutions);
+			boolean[] row = new boolean[goalRs];
+			for (int j = 0; j < goalRs; j++) {
 				if(row[j] = scan.nextInt() == 0){
 					row[j]=false;
 				}else{
@@ -207,6 +207,7 @@ public class Prime {
 			pairs[nOfRows] = number;
 			System.out.println("Hittat " + nOfRows + "tal");
 			rs.add(x);
+			r2s.add(x);
 			return 1;
 		}
 		return 0;
