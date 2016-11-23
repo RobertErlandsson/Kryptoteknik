@@ -21,7 +21,8 @@ public class Prime {
 	static ArrayList<BigInteger> rs;
 	static ArrayList<BigInteger> r2s;
 	static ArrayList<boolean[]> solutions;
-
+														//KOM IHÅG 2787!
+	
 	public static void main(String[] args) {
 		// ArrayList<BigInteger> numbers = readFile("DATA/input.txt"); // Reads
 		// from file Numbers include those that should be tested plus our own
@@ -31,7 +32,7 @@ public class Prime {
 													// one
 													// of the numbers
 		long start = System.currentTimeMillis();
-		L = 12;// number of primes in the factorbase
+		L = 10;// number of primes in the factorbase
 		goalRs = L + 5; // Number of different r:s we need
 		primes = new long[L]; // vector to store the first L primes
 		pairs = new A[goalRs];
@@ -364,7 +365,7 @@ public class Prime {
 	private static void test_solution(A solution, BigInteger N) {
 		BigInteger x = solution.getX().mod(N);
 		BigInteger y = solution.getY();
-		int[] sol = solution.get_factors();
+		int[] sol = solution.get_factors(); 
 		for (int i = 0; i < L; i++) {
 			sol[i] /= 2;
 		}
@@ -372,7 +373,8 @@ public class Prime {
 		for (int i = 0; i < L; i++) {
 			aa = aa.multiply(BigInteger.valueOf(primes[i]).pow(sol[i])).mod(N);
 		}
-		BigInteger GCD = N.gcd(x.subtract(aa));
+		System.out.println("x = " + x + " aa = " + aa);
+		BigInteger GCD = N.gcd(x.subtract(y));
 		System.out.println(GCD);
 		if (GCD.compareTo(BigInteger.valueOf(1)) != 0 && GCD.compareTo(N) != 0) {
 			System.out.println("SUCESS!!");
