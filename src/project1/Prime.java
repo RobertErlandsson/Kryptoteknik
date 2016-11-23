@@ -52,9 +52,8 @@ public class Prime {
 
 		// find factors of N given all pairs implemented by linus
 		getSolutions();
-		
+		System.out.println("after getSolution");
 		//find_factors(N);
-		System.out.println("after find factors");
 		
 		long end = System.currentTimeMillis();
 		System.out.println("It took " + (end - start) + " ms");
@@ -140,8 +139,8 @@ public class Prime {
 		}
 
 		int nSolutions = scan.nextInt();
+		System.out.println("Number of solutions = " +nSolutions);
 		for (int i = 0; i < nSolutions; i++) {
-			//System.out.println(nSolutions);
 			boolean[] row = new boolean[goalRs];
 			for (int j = 0; j < goalRs; j++) {
 				if(row[j] = scan.nextInt() == 0){
@@ -173,7 +172,7 @@ public class Prime {
 		}
 		return primes;
 	}
-
+	
 	private static int test_BI(BigInteger x, BigInteger y, int nOfRows) {
 		A number = new A(x, y, L);
 		int[] expo = new int[L];
