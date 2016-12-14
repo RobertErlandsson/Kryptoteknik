@@ -36,7 +36,7 @@ public class attacker {
 						System.out.println("1");
 						break;
 					}
-					if(result == 0){
+					if (result == 0) {
 						System.out.println("0");
 						break;
 					}
@@ -44,14 +44,83 @@ public class attacker {
 					if (n == 1) {
 						result = (int) (result - Math.pow(2, m));
 						System.out.print("1");
-					} else
-					{
+					} else {
 						System.out.print("0");
 					}
 					m--;
 				}
 			}
 			s = Integer.toBinaryString(Integer.valueOf(s, 2) + 1);
+		}
+		testsolution(ct);
+	}
+
+	private static void testsolution(String correct) {
+		int[] K1 = stoint("0000101000111");
+		int[] K2 = stoint("010011110011110");
+		int[] K3 = stoint("00111101101100100");
+		int[] P1 = stoint("1011001101011");
+		int[] P2 = stoint("101011001101010");
+		int[] P3 = stoint("11001001010011010");
+		System.out.println(P2.length);
+		for(int i = 0; i < P2.length-2; i++){
+			System.out.println(P2[i]);
+		}
+		int lengthKeyStream = 193, v1 = 0, v2 = 0, v3 = 0;
+		int[] Stream = new int[lengthKeyStream + 2];
+		for (int i = 0; i < lengthKeyStream; i++) {
+			// calculate what goes into keystream
+			System.out.println("i = " + i + " " + K1[0] + " " + K2[0] + " " + K3[0]);
+			if (K1[0] == 1 && K2[0] == 1 || K1[0] == 1 && K3[0] == 1
+					|| K2[0] == 1 && K3[0] == 1) {
+				Stream[i] = 1;
+			} else {
+				Stream[i] = 0;
+			}
+
+			// update K1
+			for (int k = 0; k < P1.length; k++) {
+				if (P1[k] == 1) {
+					v1 += K1[k];
+				}
+			}
+
+			for (int j = 0; j < P1.length - 2; j++) {
+				K1[j] = K1[j + 1];
+			}
+			K1[P1.length - 2] = v1 % 2;
+
+			// update K2
+			for (int k = 0; k < P2.length; k++) {
+				if (P2[k] == 1) {
+					v2 += K2[k];
+//					System.out.println("Added " + K2[k] + " from index " + k);
+				}
+			}
+			System.out.println();
+			for (int j = 0; j < P2.length - 2; j++) {
+				K2[j] = K2[j + 1];
+			}
+			K2[P2.length - 2] = v2 % 2;
+
+			// update K3
+			for (int k = 0; k < P3.length; k++) {
+				if (P3[k] == 1) {
+					v3 += K3[k];
+				}
+			}
+			for (int j = 0; j < P3.length - 2; j++) {
+				K3[j] = K3[j + 1];
+			}
+			K3[P3.length - 2] = v3 % 2;
+	//		System.out.println("i = " + i + " v1 = " + v1 + " v2 = " + v2 + " v3 = " + v3);
+			v1 = 0;
+			v2 = 0;
+			v3 = 0;
+		}
+		int[] corr = stoint(correct);
+		for(int i = 0; i < Stream.length; i++){
+			System.out.println("i = "+ i + " " + Stream[i] + " " + corr[i]);
 		}
 	}
 
